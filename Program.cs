@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,11 @@ namespace ClassExample
     {
         class Parent
         {
+            public static int counter = 0;
+            public void CounteParent()
+            {
+                Parent.counter++;
+            }
             public Parent() { Console.WriteLine("Parent()"); }
             public Parent(int param) { Console.WriteLine("Parent(int param)"); }
             public Parent(String param) { Console.WriteLine("Parent(string param)"); }
@@ -17,6 +23,10 @@ namespace ClassExample
 
         class Child : Parent
         {
+            public void CountChild()
+            {
+                Child.counter++;
+            }
             public Child() : base(10)
             {
                 Console.WriteLine("Child():base(10)");
@@ -31,6 +41,14 @@ namespace ClassExample
         {
             Child childA = new Child();
             Child childB = new Child("string");
+
+            Parent parent = new Parent();
+            Child child = new Child();
+
+            parent.CounteParent();
+            child.CounteParent();
+            Console.WriteLine(Parent.counter);
+            Console.WriteLine(Child.counter);
         }
     }
 }
